@@ -2,25 +2,24 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Tree t = new Tree();
         Scanner in = new Scanner(System.in);
-        int num = in.nextInt();
-        if (num == 1) {
+        TreeOP op = new TreeOP();
+        int total = in.nextInt();
+        if (total == 1) {
             System.out.print(0 + "\n" + 0 + "\n" + 0);
         } else {
-            t.data = in.nextInt();
-            t.lChild = new Tree(in.nextInt());
-            for (int i = 0; i < num - 2; i++) {
-                t = t.CreatTree(t, in.nextInt(), in.nextInt());
+            op.tree.data = in.nextInt();
+            op.tree.lChild = new Tree(in.nextInt());
+            for (int i = 0; i < total - 2; i++) {
+                op.creatTree(in.nextInt(), in.nextInt());
             }
-            System.out.println(t.lChild.rChild.lChild.data);
-//            t.PreOrderTree(t);
-//            System.out.println();
-//            t.InOrderTree(t);
-//            System.out.println();
-//            t.LaOrderTree(t);
-//        System.out.println(t.lChild.lChild.data);
+            op.PreOrderTree(op.tree);
+            System.out.println();
+            op.InOrderTree(op.tree);
+            System.out.println();
+            op.LaOrderTree(op.tree);
         }
 
     }
+
 }
