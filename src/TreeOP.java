@@ -1,3 +1,5 @@
+import java.util.Vector;
+
 public class TreeOP {
     Tree tree = new Tree();
 
@@ -15,20 +17,20 @@ public class TreeOP {
     }
 
     private Tree findNode(Tree t, int data) {
-        Tree p =null;
-        if (t!=null){
-            if (t.data==data){
+        Tree p;
+        if (t != null) {
+            if (t.data == data) {
                 return t;
             }
-            if (t.lChild!=null){
-                p=findNode(t.lChild,data);
-                if (p!=null){
+            if (t.lChild != null) {
+                p = findNode(t.lChild, data);
+                if (p != null) {
                     return p;
                 }
             }
-            if (t.rChild!=null){
-                p=findNode(t.rChild,data);
-                if (p!=null){
+            if (t.rChild != null) {
+                p = findNode(t.rChild, data);
+                if (p != null) {
                     return p;
                 }
             }
@@ -59,6 +61,56 @@ public class TreeOP {
             LaOrderTree(t.lChild);
             LaOrderTree(t.rChild);
             System.out.print(t.data + " ");
+        }
+    }
+
+    public int calcHeight(Tree b) {
+        if (b == null) {
+            return 0;
+        } else {
+            return Math.max(calcHeight(b.lChild), calcHeight(b.rChild)) + 1;
+        }
+
+    }
+
+    public int calcWidth(Tree b) {
+        if (b == null) {
+            return 0;
+        } else {
+            int maxWidth = 0;
+            if (b.lChild == null && b.rChild == null) {
+                return 1;
+            } else {
+                maxWidth = Math.max(calcWidth(b.lChild) + calcWidth(b.rChild), maxWidth);
+            }
+            return maxWidth;
+        }
+
+    }
+
+    public void findPath(Tree tree,
+                         int data,
+                         Vector<Tree> path) {
+        if (tree == null) {
+            return;
+        }
+        path.add(tree);
+        if (tree.data == data) {
+            printPath(path);
+            return;
+        }
+        if (tree.lChild != null) {
+            findPath(tree.lChild, data, path);
+        }
+        if (tree.rChild != null) {
+            findPath(tree.rChild, data, path);
+        }
+        path.remove(path.lastElement());
+    }
+
+    private void printPath(Vector<Tree> path) {
+        for (Tree t: path){
+            System.out.print(t.data+" ");
         }
     }
 }
